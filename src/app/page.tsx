@@ -1,7 +1,10 @@
-const Page = ()=>{
+import prisma from "@/lib/db"
+
+const Page = async()=>{
+  const user = await prisma.user.findMany()
   return (
     <div className="text-red-200">
-      Hello
+      {JSON.stringify(user)}
     </div>
   )
 }
