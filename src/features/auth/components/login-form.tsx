@@ -1,7 +1,7 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import Image from "next/link"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner";
@@ -84,6 +84,7 @@ onError: (ctx)=>{
                                 <div className="flex flex-col gap-4">
 
                                     <Button variant={"outline"} className="w-full" type="button" disabled={isPending}>
+                                       <Image src="/github.svg" alt="github" height={20} width={20}/>
                                         Continue with Github
                                     </Button>
                                     <Button variant={"outline"} className="w-full" type="button" disabled={isPending}>
