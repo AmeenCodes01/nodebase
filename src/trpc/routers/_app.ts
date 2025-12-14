@@ -1,23 +1,31 @@
 import { email, z } from 'zod';
-import {  createTRPCRouter, protectedProcedure } from '../init';
+import { baseProcedure, createTRPCRouter, protectedProcedure } from '../init';
 import prisma from '@/lib/db';
 import { inngest } from '@/inngest/client';
+import { generateText } from 'ai';
 export const appRouter = createTRPCRouter({
     getWorkflows: protectedProcedure.query(({ ctx }) => {
         console.log(process.env.DATABASE_URL)
         return prisma.workflow.findMany()
     }),
-    createWorkflow: protectedProcedure.mutation(async()=>{
-        await inngest.send({
-            name:"test/hello.world",
-            data:{
-                email:"masaqib5@gmail.com" 
-            }
-        })
-        return {success: true, message:"Job queued"}
-    })
+    createWorkflow: protectedProcedure.mutation(async () => {
+        // await inngest.send({
+        //     name: "test/hello.world",
+        //     data: {
+        //         email: "masaqib5@gmail.com"
+        //     }
+        // })
+        return { success: true, message: "Job queued" }
+    },
+    ),
+    testAI: baseProcedure.mutation(async () => {
 
-});
+        await inngest.send({
+            name: "execute/ai",
+        })
+        return { success: true, message: "Job queued" }
+    })
+})
 // export type definition of API
 export type AppRouter = typeof appRouter;
 
