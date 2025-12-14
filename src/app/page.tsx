@@ -19,13 +19,16 @@ const create =useMutation(trpc.createWorkflow.mutationOptions(
     }
   }
 ))
-
+  const testAI = useMutation(trpc.testAI.mutationOptions())
   return (
     <div className="text-red-200">
       {JSON.stringify(data)}
       <SignOut/>
       <Button disabled={create.isPending} onClick={()=> create.mutate()}>
         Create workflow
+      </Button>
+      <Button disabled={testAI.isPending} onClick={()=> testAI.mutate()}>
+        testAI
       </Button>
       </div>
   )
